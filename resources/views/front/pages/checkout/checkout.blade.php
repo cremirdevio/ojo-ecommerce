@@ -269,6 +269,20 @@
                                                         <input type="hidden" name="razorpay_payment_id"
                                                             id="razorpay-payment-id">
                                                     @endif
+                                                    @if ($payment->slug == 'flutterwave')
+                                                        <div class="form-group">
+                                                            <div class="form-check card-check">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="payment" id="flutterwave" value="flutterwave" />
+                                                                <label class="form-check-label"
+                                                                       for="flutterwave">{{ $payment->name }}</label>
+                                                                <div class="input-icon">
+                                                                    <img style="height: 20px;" src="{{ asset(IMG_PAYMENT_GATEWAY . $payment->image) }}"
+                                                                         alt="flutterwave" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     @if ($payment->slug == 'bank')
                                                         <div class="form-group">
                                                             <div class="form-check card-check">

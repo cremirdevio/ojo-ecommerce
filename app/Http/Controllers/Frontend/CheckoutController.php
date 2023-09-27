@@ -197,6 +197,9 @@ class CheckoutController extends Controller
                 } elseif ($request->payment == 'paypal') {
                     session()->put('payment_method_name', PAYPAL);
                     return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
+                } elseif ($request->payment == 'flutterwave') {
+                    session()->put('payment_method_name', FLUTTERWAVE);
+                    return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
                 } elseif ($request->payment == 'COD') {
                     return $this->orderCreateCall($order_number, $shipping_charge, $tax, $subtotal, $this->discount, $this->grand_total, COD);
                 } elseif ($request->payment == 'bank') {
@@ -359,7 +362,10 @@ class CheckoutController extends Controller
         } elseif ($request->payment == 'paypal') {
             session()->put('payment_method_name', PAYPAL);
             return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
-        } elseif ($request->payment == 'COD') {
+        } elseif ($request->payment == 'flutterwave') {
+            session()->put('payment_method_name', FLUTTERWAVE);
+            return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
+        }  elseif ($request->payment == 'COD') {
             return $this->orderCreateCall($order_number, $shipping_charge, $tax, $subtotal, $this->discount, $this->grand_total, COD);
         } elseif ($request->payment == 'bank') {
             if ($request->bank_transaction_number != null) {
@@ -500,7 +506,7 @@ class CheckoutController extends Controller
             }
             $data['success'] = true;
         }
-        // mail 
+        // mail
         $this->orderConfirmMail($order);
         return $data;
     }
