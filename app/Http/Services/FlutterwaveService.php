@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Traits\ConsumesExternalServices;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class FlutterwaveService
@@ -44,13 +45,12 @@ class FlutterwaveService
         session()->put('paymentReferenceId', $reference);
 
         $payment = $this->initiatePayment($value, $currency, $reference);
-
         return redirect($payment->link);
     }
 
     public function initiatePayment($value, $currency, $reference)
     {
-        $billing_address = json_decode(Session::get('billing_address'));
+        $billing_address = json_decode(json_encode(Session::get('billing_address')));
 
         return $this->makeRequest(
             'POST',
@@ -83,6 +83,12 @@ class FlutterwaveService
         if (session()->has('paymentReferenceId')) {
             $paymentReferenceId = session()->get('paymentReferenceId');
 
+            if (request()->query('status') === "cancelled" || request()->query('status') !== "success") {
+                $data['message'] = "Payment cancelled";
+
+                return $data;
+            }
+
             // get transaction ref from callback
             $transactionReference = request()->query('tx_ref');
 
@@ -92,6 +98,10 @@ class FlutterwaveService
 
             // get transaction id from callback
             $transactionID = request()->query('transaction_id');
+
+            if (!$transactionID) {
+                return $data;
+            }
 
             $confirmation = $this->confirmPayment($transactionID);
 

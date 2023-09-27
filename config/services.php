@@ -62,11 +62,11 @@ return [
     ],
 
     'flutterwave' => [
-        'base_uri' => env('FLUTTERWAVE_SANDBOX') ? 'https://api.flutterwave.com' : 'https://sandbox.flutterwave.com',
+        'base_uri' => env('FLUTTERWAVE_SANDBOX') ? 'https://api.flutterwave.com' : 'https://api.flutterwave.com',
         'client_key' => env('FLUTTERWAVE_KEY'),
         'client_secret' => env('FLUTTERWAVE_SECRET'),
         'client_secret_hash' => env('FLUTTERWAVE_SECRET_HASH'),
-        'class' => App\Http\Services\PaypalService::class,
+        'class' => App\Http\Services\FlutterwaveService::class,
     ],
 
 ];

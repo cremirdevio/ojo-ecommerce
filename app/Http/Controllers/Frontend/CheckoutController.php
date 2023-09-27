@@ -151,7 +151,7 @@ class CheckoutController extends Controller
                 session()->put('tax', $tax);
                 if ($request->payment == 'creditcard') {
                     session()->put('payment_method_name', STRIPE);
-                    return  $this->pay($this->grand_total, $this->discount, 'USD', 2, $request->payment_method);
+                    return  $this->pay($this->grand_total, $this->discount, 'USD', 2, $request->payment);
                 } elseif ($request->payment == 'sslcommerz') {
                     $tran_id = uniqid();
                     $post_data = array();
@@ -196,10 +196,10 @@ class CheckoutController extends Controller
                     }
                 } elseif ($request->payment == 'paypal') {
                     session()->put('payment_method_name', PAYPAL);
-                    return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
+                    return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment);
                 } elseif ($request->payment == 'flutterwave') {
                     session()->put('payment_method_name', FLUTTERWAVE);
-                    return  $this->pay($this->grand_total, $this->discount, 'USD', 6, $request->payment_method);
+                    return  $this->pay($this->grand_total, $this->discount, 'USD', 6, $request->payment);
                 } elseif ($request->payment == 'COD') {
                     return $this->orderCreateCall($order_number, $shipping_charge, $tax, $subtotal, $this->discount, $this->grand_total, COD);
                 } elseif ($request->payment == 'bank') {
@@ -221,6 +221,7 @@ class CheckoutController extends Controller
                     return redirect()->back()->with('error', 'Payment method is required');
                 }
             } catch (\Exception $e) {
+                throw $e;
                 return redirect()->back()->with('error', 'Something went wrong');
             }
         } else {
@@ -316,7 +317,7 @@ class CheckoutController extends Controller
 
         if ($request->payment == 'creditcard') {
             session()->put('payment_method_name', STRIPE);
-            return  $this->pay($this->grand_total, $this->discount, 'USD', 2, $request->payment_method);
+            return  $this->pay($this->grand_total, $this->discount, 'USD', 2, $request->payment);
         } elseif ($request->payment == 'sslcommerz') {
             $tran_id = uniqid();
             $post_data = array();
@@ -361,10 +362,10 @@ class CheckoutController extends Controller
             }
         } elseif ($request->payment == 'paypal') {
             session()->put('payment_method_name', PAYPAL);
-            return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
+            return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment);
         } elseif ($request->payment == 'flutterwave') {
             session()->put('payment_method_name', FLUTTERWAVE);
-            return  $this->pay($this->grand_total, $this->discount, 'USD', 6, $request->payment_method);
+            return  $this->pay($this->grand_total, $this->discount, 'USD', 6, $request->payment);
         }  elseif ($request->payment == 'COD') {
             return $this->orderCreateCall($order_number, $shipping_charge, $tax, $subtotal, $this->discount, $this->grand_total, COD);
         } elseif ($request->payment == 'bank') {
