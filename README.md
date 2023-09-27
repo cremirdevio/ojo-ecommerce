@@ -1,3 +1,3 @@
-# LEGENDzEMPIRE
+# LegendzEmpire
 
-E-commerce website
+A simple and classic e-commerce project
