@@ -82,8 +82,7 @@ class FlutterwaveService
         $data = ['success' => false, 'amount' => '', 'message' => 'We can not capture the payment. Please, Try again!'];
         if (session()->has('paymentReferenceId')) {
             $paymentReferenceId = session()->get('paymentReferenceId');
-
-            if (request()->query('status') === "cancelled" || request()->query('status') !== "success") {
+            if (request()->query('status') === "cancelled" || !request()->has('transaction_id')) {
                 $data['message'] = "Payment cancelled";
 
                 return $data;
@@ -99,11 +98,9 @@ class FlutterwaveService
             // get transaction id from callback
             $transactionID = request()->query('transaction_id');
 
-            if (!$transactionID) {
-                return $data;
-            }
-
             $confirmation = $this->confirmPayment($transactionID);
+
+            Log::info("Payment Verification: ".json_encode($confirmation));
 
             if ($confirmation->status === 'successful') {
                 // $name = $confirmation->customer->name;
@@ -121,9 +118,14 @@ class FlutterwaveService
 
     public function confirmPayment($transactionID)
     {
+        Log::info("confirming $transactionID");
         return $this->makeRequest(
-            'POST',
+            'GET',
             "/v3/transactions/$transactionID/verify",
+            [],
+            [],
+            [],
+            true
         );
     }
 
@@ -139,10 +141,7 @@ class FlutterwaveService
     {
         $zeroDecimalCurrencies = ['JPY'];
 
-        if (in_array(strtoupper($currency), $zeroDecimalCurrencies)) {
-            return 1;
-        }
-        return 100;
+        return 1;
     }
 
 }

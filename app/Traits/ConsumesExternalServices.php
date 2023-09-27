@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 trait ConsumesExternalServices
 {
@@ -26,6 +27,7 @@ trait ConsumesExternalServices
 
         $response = $response->getBody()->getContents();
         if(method_exists($this, 'decodeResponse')){
+            Log::info("request response: ". json_encode($response));
             $response = $this->decodeResponse($response);
         }
         return $response;
