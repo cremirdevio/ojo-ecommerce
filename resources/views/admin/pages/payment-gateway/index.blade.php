@@ -197,9 +197,9 @@
                                 <label>{{ __('Visibility') }}</label>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" name="status" class="custom-control-input"
-                                        id="customSwitch1" value="1" {{ $pg->status == ACTIVE ? 'checked' : '' }}>
+                                        id="customSwitch_{{ $pg->id }}" value="1" {{ $pg->status == ACTIVE ? 'checked' : '' }}>
                                     <label class="custom-control-label"
-                                        for="customSwitch1">{{ __('Click here to check/uncheck visibility.') }}</label>
+                                        for="customSwitch_{{ $pg->id }}">{{ __('Click here to check/uncheck visibility.') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -242,10 +242,10 @@
                         <div class="input__group mb-25">
                             <label>{{ __('Visibility') }}</label>
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" name="status" class="custom-control-input" id="customSwitch1"
+                                <input type="checkbox" name="status" class="custom-control-input" id="customSwitch2"
                                     value="1" {{ env('COD_STATUS') == ACTIVE ? 'checked' : '' }}>
                                 <label class="custom-control-label"
-                                    for="customSwitch1">{{ __('Click here to check/uncheck visibility.') }}</label>
+                                    for="customSwitch2">{{ __('Click here to check/uncheck visibility.') }}</label>
                             </div>
                         </div>
                     </div>
