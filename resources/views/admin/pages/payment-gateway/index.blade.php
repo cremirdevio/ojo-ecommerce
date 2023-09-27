@@ -38,7 +38,7 @@
                             @forelse ($payment_gateways as $pg)
                                 <tr>
                                     <td>{{ $pg->name }}</td>
-                                    <td><img src="{{ asset(IMG_PAYMENT_GATEWAY . $pg->image) }}"
+                                    <td><img height="50px" src="{{ asset(IMG_PAYMENT_GATEWAY . $pg->image) }}"
                                             alt="{{ $pg->name }}">
                                     </td>
                                     <td>
