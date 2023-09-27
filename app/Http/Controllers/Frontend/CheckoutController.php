@@ -453,7 +453,7 @@ class CheckoutController extends Controller
 
     public function paymentStatus($payment_method)
     {
-        if ($payment_method == STRIPE || $payment_method == PAYPAL) {
+        if ($payment_method == STRIPE || $payment_method == PAYPAL || $payment_method == FLUTTERWAVE) {
             return PAYMENT_SUCCESS;
         }
         return PAYMENT_PENDING;

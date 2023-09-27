@@ -62,7 +62,7 @@ return [
     ],
 
     'flutterwave' => [
-        'base_uri' => env('FLUTTERWAVE_SANDBOX') ? 'https://api.flutterwave.com/v3' : 'https://sandbox.flutterwave.com/v3',
+        'base_uri' => env('FLUTTERWAVE_SANDBOX') ? 'https://api.flutterwave.com' : 'https://sandbox.flutterwave.com',
         'client_key' => env('FLUTTERWAVE_KEY'),
         'client_secret' => env('FLUTTERWAVE_SECRET'),
         'client_secret_hash' => env('FLUTTERWAVE_SECRET_HASH'),
