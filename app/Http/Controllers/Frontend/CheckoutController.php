@@ -199,7 +199,7 @@ class CheckoutController extends Controller
                     return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
                 } elseif ($request->payment == 'flutterwave') {
                     session()->put('payment_method_name', FLUTTERWAVE);
-                    return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
+                    return  $this->pay($this->grand_total, $this->discount, 'USD', 6, $request->payment_method);
                 } elseif ($request->payment == 'COD') {
                     return $this->orderCreateCall($order_number, $shipping_charge, $tax, $subtotal, $this->discount, $this->grand_total, COD);
                 } elseif ($request->payment == 'bank') {
@@ -364,7 +364,7 @@ class CheckoutController extends Controller
             return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
         } elseif ($request->payment == 'flutterwave') {
             session()->put('payment_method_name', FLUTTERWAVE);
-            return  $this->pay($this->grand_total, $this->discount, 'USD', 1, $request->payment_method);
+            return  $this->pay($this->grand_total, $this->discount, 'USD', 6, $request->payment_method);
         }  elseif ($request->payment == 'COD') {
             return $this->orderCreateCall($order_number, $shipping_charge, $tax, $subtotal, $this->discount, $this->grand_total, COD);
         } elseif ($request->payment == 'bank') {

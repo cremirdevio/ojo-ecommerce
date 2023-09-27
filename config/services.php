@@ -61,4 +61,12 @@ return [
         'redirect' => env('FACEBOOK_CALLBACK_URL'),
     ],
 
+    'flutterwave' => [
+        'base_uri' => env('FLUTTERWAVE_SANDBOX') ? 'https://api.flutterwave.com/v3' : 'https://sandbox.flutterwave.com/v3',
+        'client_key' => env('FLUTTERWAVE_KEY'),
+        'client_secret' => env('FLUTTERWAVE_SECRET'),
+        'client_secret_hash' => env('FLUTTERWAVE_SECRET_HASH'),
+        'class' => App\Http\Services\PaypalService::class,
+    ],
+
 ];
