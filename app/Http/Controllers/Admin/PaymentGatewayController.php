@@ -60,6 +60,10 @@ class PaymentGatewayController extends Controller
                 } elseif ($slug == 'razorpay') {
                     $env_val['RAZORPAY_KEY'] = $request->razorpay_key;
                     $env_val['RAZORPAY_SECRET'] = $request->razorpay_secret;
+                } elseif ($slug == 'flutterwave') {
+                    $env_val['FLUTTERWAVE_KEY'] = $request->flutterwave_key;
+                    $env_val['FLUTTERWAVE_SECRET'] = $request->flutterwave_secret;
+                    $env_val['FLUTTERWAVE_SECRET_HASH'] = $request->flutterwave_secret_hash;
                 } elseif ($slug == 'bank') {
                     $env_val['BANK_NAME'] =  $request->bank_name;
                     $env_val['BANK_SWIFT_CODE'] = $request->swift_code;
@@ -68,6 +72,7 @@ class PaymentGatewayController extends Controller
                     $env_val['BANK_ACCOUNT_HOLDER_NAME'] =  $request->bank_account_holder_name;
                     $env_val['BANK_ACCOUNT_BRANCH'] =  $request->bank_account_branch;
                 }
+
                 $update = $this->setEnvValue($env_val);
 
                 if ($update == true) {

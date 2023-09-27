@@ -14,34 +14,40 @@ class PaymentPlatformsTableSeeder extends Seeder
      */
     public function run()
     {
-        PaymentPlatform::create([
+        PaymentPlatform::query()->firstOrCreate([
             'name' => 'PayPal',
             'slug' => 'paypal',
             'image' => 'paypal.png'
         ]);
 
-        PaymentPlatform::create([
+        PaymentPlatform::query()->firstOrCreate([
             'name' => 'Stripe',
             'slug' => 'stripe',
             'image' => 'payment-method.png'
         ]);
 
-        PaymentPlatform::create([
+        PaymentPlatform::query()->firstOrCreate([
             'name' => 'Razorpay',
             'slug' => 'razorpay',
             'image' => 'razorpay.png'
         ]);
 
-        PaymentPlatform::create([
+        PaymentPlatform::query()->firstOrCreate([
             'name' => 'Bank',
             'slug' => 'bank',
             'image' => 'bank.png'
         ]);
-        
-        PaymentPlatform::create([
+
+        PaymentPlatform::query()->firstOrCreate([
             'name' => 'Sslcommerz',
             'slug' => 'sslcommerz',
             'image' => 'sslcommerz.png'
+        ]);
+
+        PaymentPlatform::query()->firstOrCreate([
+            'name' => 'Flutterwave',
+            'slug' => 'flutterwave',
+            'image' => ''
         ]);
     }
 }

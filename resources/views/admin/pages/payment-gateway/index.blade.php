@@ -149,6 +149,20 @@
                                     <input type="text" name="razorpay_secret" value="{{ env('RAZORPAY_SECRET') }}">
                                 </div>
                             @endif
+                            @if ($pg->slug == 'flutterwave')
+                                <div class="input__group mb-25">
+                                    <label for="exampleInputEmail1">{{ __('Key') }}</label>
+                                    <input type="text" name="flutterwave_key" value="{{ env('FLUTTERWAVE_KEY') }}">
+                                </div>
+                                <div class="input__group mb-25">
+                                    <label for="exampleInputEmail1">{{ __('Secret') }}</label>
+                                    <input type="text" name="flutterwave_secret" value="{{ env('FLUTTERWAVE_SECRET') }}">
+                                </div>
+                                <div class="input__group mb-25">
+                                    <label for="exampleInputEmail1">{{ __('Secret Hash') }}</label>
+                                    <input type="text" name="flutterwave_secret_hash" value="{{ env('FLUTTERWAVE_SECRET_HASH') }}">
+                                </div>
+                            @endif
                             @if ($pg->slug == 'bank')
                                 <div class="input__group mb-25">
                                     <label for="exampleInputEmail1">{{ __('Bank Name') }}</label>
